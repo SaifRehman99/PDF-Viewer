@@ -9,10 +9,10 @@ let pdfMaterial = null,
 // size of pdf
 const size = 1,
     canvas = document.querySelector('#pdfDisplay');
-    context = canvas.getContext('2d');
+context = canvas.getContext('2d');
 
 
-    
+
 // displaying the page
 const displayPage = (num) => {
 
@@ -20,27 +20,27 @@ const displayPage = (num) => {
     pageDisplaying = true;
 
     // getting the page here by getPage method
-    pdfMaterial.getPage(num).then((page)=>{
+    pdfMaterial.getPage(num).then((page) => {
 
         // setting the size
-        const viewport = page.getViewport({scale:size});
+        const viewport = page.getViewport({ scale: size });
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
         // creating obj here
         const renderThings = {
-            canvasContext : context,
+            canvasContext: context,
             viewport
         }
 
 
-        page.render(renderThings).promise.then(()=>{
-                pageDisplaying = false
+        page.render(renderThings).promise.then(() => {
+            pageDisplaying = false
 
-                if(pageFetching !== null){
-                    displayPage(pageFetching);
-                    pageFetching = null;
-                }
+            if (pageFetching !== null) {
+                displayPage(pageFetching);
+                pageFetching = null;
+            }
         });
 
         // printing the current page here
@@ -50,6 +50,45 @@ const displayPage = (num) => {
 
 }
 
+// checking for the page displaying
+const pageWiseDisplay = (num) => {
+    if (pageDisplaying) {
+        pageFetching = num;
+    }
+    else {
+        displayPage(num)
+    }
+}
+
+
+// show prev page
+const prevPage = () => {
+    if (pageCount <= 1) {
+        return;
+    }
+    else {
+        pageCount--;
+    }
+}
+
+
+
+// show next page
+const nextPage = () => {
+    if (pageCount >= pdfMaterial.numPages) {
+        return;
+    }
+    else {
+        pageCount++;
+    }
+}
+
+
+// getting the element to move thorugh prev page
+document.querySelector('#prevPage').addEventListener('click', prevPage)
+
+// moving to the next pages
+document.querySelector('#nextPage').addEventListener('click', nextPage);
 
 
 // getting the pdf here by using pdf.js library object here
