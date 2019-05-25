@@ -8,9 +8,23 @@ let pdfMaterial = null,
 
 // size of pdf
 const size = 1,
+    // where to display get the refrence here
     canvas = document.querySelector('#pdfDisplay');
 context = canvas.getContext('2d');
 
+
+// getting the pdf here by using pdf.js library object here
+pdfjsLib.getDocument(docsPath).promise.then((pdfThing) => {
+
+    // setting the page pdf obj here
+    pdfMaterial = pdfThing;
+
+    // setting the total page num in the html
+    document.querySelector('#pageCount').textContent = pdfMaterial.numPages;
+
+    // setting the initail page number here
+    displayPage(pageCount)
+})
 
 
 // displaying the page
@@ -81,22 +95,10 @@ const nextPage = () => {
     }
     else {
         pageCount++;
-        pageWiseDisplay(pageCount);        
+        pageWiseDisplay(pageCount);
     }
 }
 
-// getting the pdf here by using pdf.js library object here
-pdfjsLib.getDocument(docsPath).promise.then((pdfThing) => {
-
-    // setting the page pdf obj here
-    pdfMaterial = pdfThing;
-
-    // setting the total page num in the html
-    document.querySelector('#pageCount').textContent = pdfMaterial.numPages;
-
-    // setting the initail page number here
-    displayPage(pageCount)
-})
 
 // getting the element to move thorugh prev page
 document.querySelector('#prevPage').addEventListener('click', prevPage)
