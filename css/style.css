@@ -13,3 +13,7 @@ body {
     background-size: cover;
     /* Resize the background image to cover the entire container */
 }
+
+.center{
+    padding: 0px 400px !important;
+}

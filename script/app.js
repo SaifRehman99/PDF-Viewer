@@ -68,6 +68,7 @@ const prevPage = () => {
     }
     else {
         pageCount--;
+        pageWiseDisplay(pageCount);
     }
 }
 
@@ -80,16 +81,9 @@ const nextPage = () => {
     }
     else {
         pageCount++;
+        pageWiseDisplay(pageCount);        
     }
 }
-
-
-// getting the element to move thorugh prev page
-document.querySelector('#prevPage').addEventListener('click', prevPage)
-
-// moving to the next pages
-document.querySelector('#nextPage').addEventListener('click', nextPage);
-
 
 // getting the pdf here by using pdf.js library object here
 pdfjsLib.getDocument(docsPath).promise.then((pdfThing) => {
@@ -103,3 +97,9 @@ pdfjsLib.getDocument(docsPath).promise.then((pdfThing) => {
     // setting the initail page number here
     displayPage(pageCount)
 })
+
+// getting the element to move thorugh prev page
+document.querySelector('#prevPage').addEventListener('click', prevPage)
+
+// moving to the next pages
+document.querySelector('#nextPage').addEventListener('click', nextPage);
