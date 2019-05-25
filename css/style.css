@@ -3,7 +3,7 @@ body {
     /* The image used */
     background-color: #cccccc;
     /* Used if the image is unavailable */
-    height: 500px;
+    height: 100vh;
     /* You must set a specified height */
     background-position: center;
     /* Center the image */
