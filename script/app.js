@@ -48,8 +48,9 @@ const displayPage = (num) => {
 
     })
 
-
 }
+
+
 
 // getting the pdf here by using pdf.js library object here
 pdfjsLib.getDocument(docsPath).promise.then((pdfThing) => {
